@@ -1,5 +1,5 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
 }
 
@@ -8,13 +8,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.frankov.presentation"
         minSdk = 26
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -26,7 +20,6 @@ android {
             )
         }
     }
-
     buildFeatures {
         compose = true
     }
@@ -37,15 +30,15 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.3.2"
+    }
 }
 
 dependencies {
-    val lifecycleVersion = "2.6.2"
-
-    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
-
 
     implementation(platform("androidx.compose:compose-bom:2023.03.00"))
     implementation("androidx.activity:activity-compose:1.8.0")

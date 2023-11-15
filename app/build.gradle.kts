@@ -29,6 +29,9 @@ android {
             )
         }
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.3.2"
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -39,21 +42,18 @@ android {
     buildFeatures {
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
-    }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
-
 }
 
 dependencies {
-    implementation(project(":presentation", "default"))
+    implementation(project(":presentation"))
+    implementation(project(":design"))
 
-    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
 
     implementation(platform("androidx.compose:compose-bom:2023.03.00"))
