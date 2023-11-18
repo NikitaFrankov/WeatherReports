@@ -1,5 +1,6 @@
 package com.frankov.weatherreports
 
+import com.frankov.data.DataModule
 import com.frankov.presentation.navigation.NavigationFactory
 import com.frankov.presentation.screens.ScreensModule
 import com.frankov.weatherreports.ui.MainViewModel
@@ -12,5 +13,6 @@ internal object AppModule {
         single { app }
         single { get<NavigationFactory>().instance }
         viewModel { MainViewModel() }
-    } + ScreensModule.module
+    } + ScreensModule.module +
+        DataModule.module
 }

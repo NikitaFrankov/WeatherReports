@@ -50,12 +50,18 @@ android {
 }
 
 dependencies {
-    implementation(project(":presentation"))
-    implementation(project(":design"))
+    val modulePath = "path"
 
+    /** Modules */
+    implementation(project(mapOf(modulePath to ":presentation")))
+    implementation(project(mapOf(modulePath to ":design")))
+    implementation(project(mapOf(modulePath to ":data")))
+
+    /** Core */
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
 
+    /** Compose */
     implementation(platform("androidx.compose:compose-bom:2023.03.00"))
     implementation("androidx.activity:activity-compose:1.8.0")
     implementation("androidx.compose.ui:ui-tooling-preview")
@@ -67,13 +73,12 @@ dependencies {
     implementation("io.insert-koin:koin-androidx-compose:3.3.0")
     implementation("io.insert-koin:koin-android:3.3.0")
 
+    /** Testing */
     testImplementation("junit:junit:4.13.2")
-
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
-
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     debugImplementation("androidx.compose.ui:ui-tooling")
 }
