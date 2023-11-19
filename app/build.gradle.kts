@@ -54,6 +54,7 @@ dependencies {
 
     /** Modules */
     implementation(project(mapOf(modulePath to ":presentation")))
+    implementation(project(mapOf(modulePath to ":common")))
     implementation(project(mapOf(modulePath to ":design")))
     implementation(project(mapOf(modulePath to ":data")))
 
