@@ -4,13 +4,14 @@ plugins {
 }
 
 android {
-    namespace = "com.frankov.data"
-    compileSdk = 34
+    namespace = "com.frankov.network"
+    compileSdk = 33
 
     defaultConfig {
         minSdk = 26
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -32,18 +33,11 @@ android {
 }
 
 dependencies {
-    /** Modules */
-    implementation(project(mapOf("path" to ":common")))
 
-    /** Network */
-    implementation ("com.google.code.gson:gson:2.9.1")
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
-
-    /** DI */
-    implementation ("io.insert-koin:koin-android:3.3.0")
-
-    /** Testing */
+    implementation("androidx.core:core-ktx:1.9.0")
+    implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("com.google.android.material:material:1.10.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
