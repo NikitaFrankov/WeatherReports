@@ -6,6 +6,6 @@ import retrofit2.Retrofit
 
 internal object RetrofitServicesModule {
     val module = module {
-        single { get<Retrofit>(RetrofitModule.mainApiQualifier).create(MainApi::class.java) }
+        single { get<Retrofit>().create(MainApi::class.java) }
     }
 }

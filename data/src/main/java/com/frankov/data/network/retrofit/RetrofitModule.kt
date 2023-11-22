@@ -2,29 +2,26 @@ package com.frankov.data.network.retrofit
 
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
-import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 internal object RetrofitModule {
-    private const val BASE_URL = "https://api.openweathermap.org/data/3.0/"
+    private const val BASE_URL = "https://api.openweathermap.org/data/2.5/"
     private const val TIMEOUT_SECS = 30L
-
-    val mainApiQualifier = named("MainApi")
 
     val module = module {
         single { LoggerRequestInterceptor() }
         single { provideGsonConverterFactory() }
 
-        single(mainApiQualifier) {
+        single() {
             provideRetrofit(
-                client = get(mainApiQualifier),
+                client = get(),
                 gsonConverterFactory = get()
             )
         }
-        single(mainApiQualifier) {
+        single() {
             provideApiClient(loggerInterceptor = get())
         }
     }

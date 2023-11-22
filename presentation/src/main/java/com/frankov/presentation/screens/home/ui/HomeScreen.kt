@@ -1,4 +1,4 @@
-package com.frankov.presentation.screens.home
+package com.frankov.presentation.screens.home.ui
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
@@ -10,5 +10,5 @@ internal fun HomeScreen() {
     val viewModel = getViewModel<HomeViewModel>()
     val router = getKoin().get<NavHostController>()
 
-    HomeView()
+    HomeView(viewModel = viewModel)
 }

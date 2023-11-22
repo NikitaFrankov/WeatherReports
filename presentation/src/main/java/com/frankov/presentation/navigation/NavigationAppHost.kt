@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.frankov.presentation.screens.home.HomeScreen
+import com.frankov.presentation.screens.home.ui.HomeScreen
 import org.koin.androidx.compose.getKoin
 
 @Composable

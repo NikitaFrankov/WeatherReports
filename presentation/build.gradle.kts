@@ -36,7 +36,9 @@ android {
 }
 
 dependencies {
-    implementation(project(":design"))
+    implementation(project(mapOf("path" to ":domain")))
+    implementation(project(mapOf("path" to ":design")))
+    implementation(project(mapOf("path" to ":data")))
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
