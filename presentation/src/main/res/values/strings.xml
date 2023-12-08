@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">WeatherReports</string>
 
-
+    // Weather details
+    <string name="weather_details">Details</string>
+    <string name="temperature_сelsius">Celsius</string>
+    <string name="pressure">Pressure</string>
+    <string name="uv_index">UV Index</string>
+    <string name="humidity">Humidity</string>
 </resources>

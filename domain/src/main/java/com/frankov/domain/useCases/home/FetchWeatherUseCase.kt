@@ -1,9 +1,7 @@
 package com.frankov.domain.useCases.home
 
 import com.frankov.common.utils.AppDispatchers
-import com.frankov.data.network.models.location.Coordinates
-import com.frankov.data.network.models.request.FetchWeatherRequest
-import com.frankov.data.network.models.weather.CurrentWeather
+import com.frankov.data.models.request.FetchWeatherRequest
 import com.frankov.data.network.repositories.weather.WeatherRepository
 import kotlinx.coroutines.withContext
 
@@ -12,12 +10,11 @@ class FetchWeatherUseCase(
     private val dispatchers: AppDispatchers
 ) {
 
-    suspend operator fun invoke(coordinates: Coordinates) = withContext(dispatchers.io) {
+    suspend operator fun invoke(query: String) = withContext(dispatchers.io) {
         val request = FetchWeatherRequest(
-            token = "e949f9a4be7cc9cbdfbc7b8d0eab1c36",
-            coordinates = coordinates
+            key = "40e3bbc7db87428580c183429232611",
+            query = query
         )
-        val response = repository.fetchWeather(request).body()
-        CurrentWeather.from(response!!)
+        repository.fetchWeather(request).body()
     }
 }
