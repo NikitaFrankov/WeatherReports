@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -19,21 +20,30 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.frankov.design.theme.Blue
+import com.frankov.design.theme.White
 import com.frankov.design.R as Design
 import com.frankov.presentation.R
 import com.frankov.presentation.screens.cityDetails.models.WeatherDescription
@@ -46,11 +56,14 @@ internal fun HomeView(viewModel: CityDetailsViewModel) {
     Column {
         /** Header */
         Column(modifier = Modifier
-            .background(color = Blue, shape = RoundedCornerShape(bottomEnd = 24.dp, bottomStart = 24.dp))
+            .background(
+                color = Blue,
+                shape = RoundedCornerShape(bottomEnd = 24.dp, bottomStart = 24.dp)
+            )
         ) {
             MainToolBar(
                 title = state.weather.cityTitle,
-                viewModel = viewModel
+                onBackClick = viewModel::fetchWeather
             )
             AsyncImage(
                 model = state.weather.weatherIconPath,
@@ -81,9 +94,11 @@ internal fun HomeView(viewModel: CityDetailsViewModel) {
         }
         
         /** Description */
+        ForecastingView(modifier = Modifier.fillMaxWidth())
+
         Text(
             text = stringResource(id = R.string.weather_details),
-            Modifier.padding(top = 16.dp, start = 16.dp),
+            modifier = Modifier.padding(top = 16.dp, start = 16.dp),
             style = MaterialTheme.typography.bodyLarge
         )
         LazyVerticalGrid(
@@ -100,7 +115,53 @@ internal fun HomeView(viewModel: CityDetailsViewModel) {
 }
 
 @Composable
-fun DescriptionItem(
+private fun ForecastingView(modifier: Modifier) {
+    var selectedIndex by remember { mutableIntStateOf(0) }
+    val titleIds by remember {
+        mutableStateOf(
+            listOf(
+                R.string.forecast_yesterday,
+                R.string.forecast_today,
+                R.string.forecast_tomorrow,
+            )
+        )
+    }
+    Column(
+        modifier = modifier.then(
+            Modifier
+                .background(color = White, shape = RoundedCornerShape(20.dp))
+                .padding(horizontal = 16.dp)
+        )
+    ) {
+        TabRow(
+            selectedTabIndex = selectedIndex,
+            indicator = {},
+            divider = {},
+        ) {
+            titleIds.forEachIndexed { index, titleId ->
+                Tab(
+                    selected = selectedIndex == index,
+                    onClick = { selectedIndex = index },
+                    modifier = Modifier
+                        .height(40.dp)
+                        .clip(RoundedCornerShape(56))
+                        .background(if (selectedIndex == index) Blue else White),
+                    text = {
+                        Text(
+                            text = stringResource(id = titleIds[index]),
+                            fontSize = 16.sp,
+                        )
+                    },
+                    selectedContentColor = White,
+                    unselectedContentColor = Blue,
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun DescriptionItem(
     item: WeatherDescription
 ) {
     Surface(
@@ -135,7 +196,7 @@ fun DescriptionItem(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainToolBar(title: String, viewModel: CityDetailsViewModel) {
+private fun MainToolBar(title: String, onBackClick: () -> Unit) {
     CenterAlignedTopAppBar(
         colors = TopAppBarDefaults.smallTopAppBarColors(
             containerColor = Blue,
@@ -151,7 +212,7 @@ fun MainToolBar(title: String, viewModel: CityDetailsViewModel) {
         },
         navigationIcon = {
             IconButton(
-                onClick = viewModel::fetchWeather
+                onClick = onBackClick
             ) {
                 Icon(
                     painter = painterResource(id = Design.drawable.ic_back_white),

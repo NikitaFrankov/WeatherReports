@@ -4,10 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.frankov.design.theme.Grey
 import com.frankov.design.theme.WeatherReportsTheme
 import com.frankov.presentation.navigation.NavigationAppHost
 import com.frankov.presentation.navigation.NavigationFactory
@@ -29,11 +29,9 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun SetupSurface() {
-
     Surface(
-        modifier = Modifier
-            .fillMaxSize(),
-        color = MaterialTheme.colorScheme.background,
+        modifier = Modifier.fillMaxSize(),
+        color = Grey,
     ) {
         get<NavigationFactory>().Create()
         NavigationAppHost()

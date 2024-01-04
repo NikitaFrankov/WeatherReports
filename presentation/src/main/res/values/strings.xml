@@ -7,4 +7,7 @@
     <string name="pressure">Pressure</string>
     <string name="uv_index">UV Index</string>
     <string name="humidity">Humidity</string>
+    <string name="forecast_yesterday">Yesterday</string>
+    <string name="forecast_today">Today</string>
+    <string name="forecast_tomorrow">Tomorrow</string>
 </resources>
