@@ -1,8 +1,8 @@
 package com.frankov.domain
 
-import com.frankov.domain.useCases.UseCasesModule
+import com.frankov.domain.stores.cityDetails.CityDetailsStoreModule
 
 object DomainModule {
 
-    val module = UseCasesModule.module
+    val module = CityDetailsStoreModule.module
 }
