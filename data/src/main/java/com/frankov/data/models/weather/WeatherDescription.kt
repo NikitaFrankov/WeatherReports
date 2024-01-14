@@ -1,4 +1,4 @@
-package com.frankov.presentation.screens.cityDetails.models
+package com.frankov.data.models.weather
 
 sealed class WeatherDescription(open val value: String) {
     data class UltravioletIndex(override val value: String): WeatherDescription(value)

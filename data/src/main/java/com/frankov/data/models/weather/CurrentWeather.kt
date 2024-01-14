@@ -1,4 +1,4 @@
-package com.frankov.presentation.screens.cityDetails.models
+package com.frankov.data.models.weather
 
 import com.frankov.data.models.pojo.CurrentWeatherData
 import com.frankov.data.models.pojo.Weather
@@ -7,7 +7,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Date
 import java.util.Locale
-import com.frankov.presentation.screens.cityDetails.models.WeatherDescription.*
+import com.frankov.data.models.weather.WeatherDescription.*
 
 data class CurrentWeather(
     val cityTitle: String = "",
